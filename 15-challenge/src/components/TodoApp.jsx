@@ -13,7 +13,7 @@ const initialState = [
   {
     id: new Date().getTime() + 1000,
     description: "Hacer el proyecto",
-    done: false,
+    done: true,
   },
 ];
 
@@ -31,8 +31,11 @@ export const TodoApp = () => {
   return (
     <>
       <h1>
-        TodoApp: {todos.length},{" "}
+        TodoApp:
+        <br />
         <small> Pendientes: {todos.filter((todo) => !todo.done).length} </small>{" "}
+        <br />
+        <small> Completadas: {todos.filter((todo) => todo.done).length} </small>{" "}
       </h1>
       <hr />
 
