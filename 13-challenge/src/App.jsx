@@ -1,11 +1,11 @@
 import './App.css'
 import React, { useState } from 'react'
-import { Memorize } from './components/Memorize'
+import MultipleCustomHooks from './components/MultipleCustomHooks'
 
 function App() {
   return (
     <>
-      <Memorize />
+      <MultipleCustomHooks />
     </>
   )
 }

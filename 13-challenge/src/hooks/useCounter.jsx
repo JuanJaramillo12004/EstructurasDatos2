@@ -1,15 +1,14 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
-
-export const useCounter = (countValue) => {
-  const [count, setCount] = useState(countValue);
+export const useCounter = (initialState = 1) => {
+  const [counter, setCounter] = useState(initialState);
 
   const increment = () => {
-    setCount(count + 1);
-  }
+    setCounter(counter + 1);
+  };
 
   return {
-    counter: count,
-    increment
-  }
-}
+    counter,
+    increment,
+  };
+};
