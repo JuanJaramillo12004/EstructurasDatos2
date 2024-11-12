@@ -28,6 +28,13 @@ export const loginWithGoogle = createAsyncThunk("auth/loginWithGoogle", async (_
   try {
     const userCredential = await signInWithPopup(auth, provider);
     const { uid, email, displayName } = userCredential.user;
+
+    // Save user data in Firestore
+    await setDoc(doc(db, "users", uid), {
+      email,
+      username: displayName
+    }, { merge: true });
+
     return { uid, email, displayName };
   } catch (error) {
     return rejectWithValue(error.message);

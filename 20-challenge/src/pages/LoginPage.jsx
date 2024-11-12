@@ -49,6 +49,7 @@ const Login = () => {
         navigate("/dashboard", { replace: true });
       }
     } catch (err) {
+      setError(err.message); // Set error message
       console.error("Error en Google login:", err);
     }
   };
