@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addTodo, deleteTodo, toggleTodo } from "../../slice/todoSlice";
 import { TodoList, TodoAdd } from "../index";
 import "../../assets/css/TodoApp.css";
+import ImagePokemon from "../../assets/todo.png";
 
 export const TodoApp = () => {
   const todos = useSelector((state) => state.todos);
@@ -21,6 +22,7 @@ export const TodoApp = () => {
 
   return (
     <div className="todo-app">
+      <img src={ImagePokemon} height="50px" width="50px"></img>
       <h1 className="title-text-todo">To-Do</h1>
       <div className="todo-count">
         <small> Pendientes: {todos.filter((todo) => !todo.done).length} </small>{" "}

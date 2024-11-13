@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPokemon, setCounter, incrementCounter, decrementCounter } from "../../slice/pokemonSlice";
 import "../../assets/css/Pokemon.css";
+import ImagePokemon from "../../assets/pokemon.png";
 
 const PokemonApp = () => {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const PokemonApp = () => {
 
   return (
     <div className="pokedex">
+      <img src={ImagePokemon} height="50px" width="50px"></img>
       {isLoading ? (
         <div className="alert alert-info">Loading...</div>
       ) : (
