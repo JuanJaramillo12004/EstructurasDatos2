@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchTodos, addTodo, deleteTodo, updateTodo } from "../utils/todosSlice";
-import "../App.css";
+// src/components/TodoApp.jsx
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchTodos, addTodo, deleteTodo, toggleTodo, editTodo } from '../utils/todosSlice';
+import TodoList from './TodoList';
+import '../App.css';
 
 function TodoApp() {
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.todos.items);
 
@@ -14,22 +16,16 @@ function TodoApp() {
 
   const handleAddTodo = () => {
     if (text) {
-      dispatch(addTodo(text)); 
-      setText("");
+      dispatch(addTodo(text));
+      setText('');
     }
-  };
-
-  const handleDeleteTodo = (id) => {
-    dispatch(deleteTodo(id));
-  };
-
-  const handleToggleTodo = (id, completed) => {
-    dispatch(updateTodo({ id, completed }));
   };
 
   return (
     <div className="container">
-      <h1>Todo App</h1>
+      <header className="header">
+        <h1>Todo App</h1>
+      </header>
       <div className="input-container">
         <input
           type="text"
@@ -41,24 +37,12 @@ function TodoApp() {
           Añadir
         </button>
       </div>
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>
-            <input
-              type="checkbox"
-              checked={todo.completed}
-              onChange={() => handleToggleTodo(todo.id, !todo.completed)}
-            />
-            <span>{todo.text}</span>
-            <button
-              className="delete-btn"
-              onClick={() => handleDeleteTodo(todo.id)}
-            >
-              Eliminar
-            </button>
-          </li>
-        ))}
-      </ul>
+      <TodoList
+        todos={todos}
+        onDelete={(id) => dispatch(deleteTodo(id))}
+        onCheck={(id) => dispatch(toggleTodo(id))}
+        onEdit={(id, text) => dispatch(editTodo({ id, text }))}
+      />
     </div>
   );
 }

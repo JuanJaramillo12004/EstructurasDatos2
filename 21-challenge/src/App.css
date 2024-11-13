@@ -16,7 +16,7 @@ body {
 .container {
   background-color: #ffffff;
   width: 100%;
-  max-width: 400px;
+  max-width: 600px; /* Increase the max-width */
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -50,6 +50,7 @@ input[type="checkbox"] {
   cursor: pointer;
   accent-color: #4caf50;
   margin-right: 10px;
+  flex-shrink: 0; /* Prevent resizing */
 }
 
 button.add-btn {
@@ -60,11 +61,62 @@ button.add-btn {
   border-radius: 8px;
   cursor: pointer;
   font-weight: bold;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.3s;
+  margin-right: 0.5rem;
 }
 
 button.add-btn:hover {
   background-color: #43a047;
+  transform: scale(1.05);
+}
+
+button.add-btn:active {
+  background-color: #388e3c;
+  transform: scale(0.95);
+}
+
+button.delete-btn {
+  padding: 0.3rem 0.6rem;
+  background-color: #e57373;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.3s;
+  margin-left: 0.5rem;
+}
+
+button.delete-btn:hover {
+  background-color: #d32f2f;
+  transform: scale(1.05);
+}
+
+button.delete-btn:active {
+  background-color: #c62828;
+  transform: scale(0.95);
+}
+
+button.edit-btn {
+  padding: 0.3rem 0.6rem;
+  background-color: #ffb74d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.3s;
+  margin-left: 0.5rem;
+}
+
+button.edit-btn:hover {
+  background-color: #ffa726;
+  transform: scale(1.05);
+}
+
+button.edit-btn:active {
+  background-color: #fb8c00;
+  transform: scale(0.95);
 }
 
 ul {
@@ -93,17 +145,8 @@ li span {
   font-size: 1rem;
 }
 
-button.delete-btn {
-  padding: 0.3rem 0.6rem;
-  background-color: #e57373;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s;
-}
-
-button.delete-btn:hover {
-  background-color: #d32f2f;
+li.editing {
+  padding: 1.2rem 1.5rem;
+  background-color: #e0f7fa;
+  border-color: #4caf50;
 }

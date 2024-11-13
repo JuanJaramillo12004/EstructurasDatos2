@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { db } from '../firebase/credentials';
-import { ref, push, get, remove, set } from 'firebase/database';
+import { ref, push, get, set, remove, update } from 'firebase/database';
 
 export const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
   const snapshot = await get(ref(db, 'todos'));
@@ -23,14 +23,20 @@ export const deleteTodo = createAsyncThunk('todos/deleteTodo', async (id) => {
   return id;
 });
 
-export const updateTodo = createAsyncThunk('todos/updateTodo', async ({ id, completed }) => {
+export const toggleTodo = createAsyncThunk('todos/toggleTodo', async (id, { getState }) => {
+  const todo = getState().todos.items.find((todo) => todo.id === id);
+  await update(ref(db, `todos/${id}`), { completed: !todo.completed });
+  return id;
+});
+
+export const editTodo = createAsyncThunk('todos/editTodo', async ({ id, text }) => {
   const todoRef = ref(db, `todos/${id}`);
   const snapshot = await get(todoRef);
   if (snapshot.exists()) {
     const todo = snapshot.val();
-    await set(todoRef, { ...todo, completed });
+    await set(todoRef, { ...todo, text });
   }
-  return { id, completed };
+  return { id, text };
 });
 
 const todosSlice = createSlice({
@@ -48,10 +54,14 @@ const todosSlice = createSlice({
       .addCase(deleteTodo.fulfilled, (state, action) => {
         state.items = state.items.filter((todo) => todo.id !== action.payload);
       })
-      .addCase(updateTodo.fulfilled, (state, action) => {
+      .addCase(toggleTodo.fulfilled, (state, action) => {
+        const todo = state.items.find((todo) => todo.id === action.payload);
+        if (todo) todo.completed = !todo.completed;
+      })
+      .addCase(editTodo.fulfilled, (state, action) => {
         const todo = state.items.find((todo) => todo.id === action.payload.id);
         if (todo) {
-          todo.completed = action.payload.completed;
+          todo.text = action.payload.text;
         }
       });
   },
