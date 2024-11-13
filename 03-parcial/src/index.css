@@ -1,0 +1,19 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #030062;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #c6c6c6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  margin: 0 auto;
+}

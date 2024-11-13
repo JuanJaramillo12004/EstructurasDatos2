@@ -1,0 +1,12 @@
+.container {
+  margin: 0;
+  padding: 20px;
+}
+
+.navContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  margin-bottom: 20px;
+}
